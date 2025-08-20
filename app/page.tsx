@@ -1,103 +1,85 @@
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Navbar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+              Expert Medical Care, <span className="text-blue-600">Personalized</span> for You
+            </h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Comprehensive healthcare services with expert doctors and advanced diagnostics.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <Link
+                href="/book"
+                className="rounded-xl px-5 py-3 bg-blue-600 text-white hover:bg-blue-700"
+              >
+                Book Appointment
+              </Link>
+              <Link
+                href="/services"
+                className="rounded-xl px-5 py-3 border hover:bg-gray-50"
+              >
+                View Services
+              </Link>
+            </div>
+          </div>
+          <div className="relative h-72 md:h-[420px]">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="https://reynoldsclinic.com/images/clinic-hero.jpg"
+              alt="Reynolds Clinic"
+              fill
+              className="object-cover rounded-2xl shadow-xl"
+              priority
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Feature grid */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <h2 className="text-2xl md:text-3xl font-semibold">Why Choose Reynolds Clinic</h2>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { title: "Expert Doctors", desc: "Board-certified specialists across key disciplines." },
+            { title: "Advanced Diagnostics", desc: "Modern lab & imaging for accurate results." },
+            { title: "Telemedicine", desc: "Convenient online consultations from anywhere." },
+            { title: "Personalized Care", desc: "Plans tailored to your unique health goals." },
+          ].map((f) => (
+            <div key={f.title} className="p-6 border rounded-2xl hover:shadow-md transition">
+              <h3 className="font-medium">{f.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="rounded-2xl border p-8 md:p-12 text-center">
+          <h3 className="text-2xl md:text-3xl font-semibold">Ready to take control of your health?</h3>
+          <p className="mt-2 text-muted-foreground">
+            Schedule an appointment with our care team today.
+          </p>
+          <Link
+            href="/book"
+            className="inline-block mt-6 rounded-xl px-6 py-3 bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Book Now
+          </Link>
+        </div>
+      </section>
+
+      <Footer />
+    </>
   );
 }
