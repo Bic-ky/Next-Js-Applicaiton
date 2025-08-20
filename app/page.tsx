@@ -13,7 +13,7 @@ import {
   CalendarIcon,
   PhoneIcon
 } from '@heroicons/react/24/outline'
-
+import Image from 'next/image';
 // Service data
 const services = [
   {
@@ -71,7 +71,7 @@ const doctors = [
     specialty: 'Orthopedic Surgeon',
     experience: 'Specializing in joint replacement and sports medicine with 12+ years experience.',
     rating: 4.8,
-    gradient: 'from-teal-500 to-green-500',
+    gradient: 'from-primary-500 to-teal-500',
     buttonColor: 'text-teal-600 hover:text-teal-700',
   },
   {
@@ -80,7 +80,7 @@ const doctors = [
     specialty: 'Pediatrician',
     experience: 'Compassionate pediatric care with expertise in child development and family medicine.',
     rating: 5.0,
-    gradient: 'from-purple-500 to-pink-500',
+    gradient: 'from-primary-500 to-teal-500',
     buttonColor: 'text-purple-600 hover:text-purple-700',
   },
 ]
@@ -143,103 +143,98 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-teal-50 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary-200/30 to-teal-200/30 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-200/30 to-primary-200/30 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
+<section
+  id="home"
+  className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-teal-50 overflow-hidden"
+>
+  {/* Background Elements & BG Image (desktop/tablet only) */}
+  <div className="absolute inset-0 overflow-hidden hidden lg:block" aria-hidden="true">
+    <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary-200/30 to-teal-200/30 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-200/30 to-primary-200/30 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
+
+    {/* Desktop background image */}
+    <div className="relative w-full h-full">
+      <Image
+        src="/doctor.png"
+        alt="A professional doctor"
+        fill
+        priority
+        sizes="(min-width:1024px) 100vw"
+        className="object-contain"
+      />
+    </div>
+  </div>
+
+  {/* Main Content (now centered) */}
+  <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    {/* Mobile/Small screens: Image on top */}
+    <div className="lg:hidden mb-8">
+      <div className="relative w-full max-w-2xl mx-auto aspect-[4/3] sm:aspect-[16/9]">
+        <Image
+          src="/doctor.png"
+          alt="A professional doctor"
+          fill
+          sizes="100vw"
+          className="object-contain"
+          priority
+        />
+      </div>
+    </div>
+
+    {/* Content */}
+    <div className="grid lg:grid-cols-2 gap-12 items-center my-14">
+      {/* Left Column - Content (stays same) */}
+      <div className="animate-slide-up text-center lg:text-left">
+        <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-100 to-blue-100 rounded-full text-sm font-medium text-teal-700 mb-6">
+          <CheckIcon className="w-4 h-4 mr-2" />
+          Trusted Healthcare Since 1985
         </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Content */}
-            <div className="animate-slide-up">
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-100 to-blue-100 rounded-full text-sm font-medium text-teal-700 mb-6">
-                <CheckIcon className="w-4 h-4 mr-2" />
-                Trusted Healthcare Since 1985
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Your Health is Our
-                <span className="text-gradient-primary block">
-                  Priority
-                </span>
-              </h1>
-              
-              <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
-                Experience comprehensive healthcare with our team of expert doctors, advanced diagnostics, and personalized treatment plans. We're committed to providing exceptional medical care when you need it most.
-              </p>
-              
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center focus-visible:focus">
-                  <CalendarIcon className="w-5 h-5 mr-2" />
-                  Book Appointment
-                </button>
-                <button className="group btn-secondary flex items-center justify-center">
-                  <VideoCameraIcon className="w-5 h-5 mr-2" />
-                  Virtual Consultation
-                </button>
-              </div>
-              
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-                <div className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">15K+</div>
-                  <div className="text-sm text-gray-600">Happy Patients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">50+</div>
-                  <div className="text-sm text-gray-600">Expert Doctors</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">24/7</div>
-                  <div className="text-sm text-gray-600">Emergency Care</div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Right Column - Visual */}
-            <div className="relative animate-fade-in">
-              <div className="relative">
-                <div className="bg-gradient-to-br from-primary-100 to-teal-100 rounded-3xl p-8 lg:p-12">
-                  {/* Placeholder for doctor/clinic image */}
-                  <div className="bg-gradient-primary rounded-2xl h-96 flex items-center justify-center">
-                    <svg className="w-24 h-24 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                    </svg>
-                  </div>
-                </div>
-                
-                {/* Floating Cards */}
-                <div className="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-4 animate-float">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                      <CheckIcon className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm">Health Checkup</p>
-                      <p className="text-xs text-gray-500">Completed</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 animate-float delay-2000">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      <ClockIcon className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm">Appointment</p>
-                      <p className="text-xs text-gray-500">Today 2:00 PM</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          Your Health is Our
+          <span className="text-gradient-primary block">Priority</span>
+        </h1>
+
+        <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
+          Experience comprehensive healthcare with our team of expert doctors, advanced diagnostics, and personalized treatment plans. We're committed to providing exceptional medical care when you need it most.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start">
+          <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center">
+            <CalendarIcon className="w-5 h-5 mr-2" />
+            Book Appointment
+          </button>
+          <button className="group btn-secondary flex items-center justify-center">
+            <VideoCameraIcon className="w-5 h-5 mr-2" />
+            Virtual Consultation
+          </button>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
+          <div className="text-center">
+            <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">15K+</div>
+            <div className="text-sm text-gray-600">Happy Patients</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">50+</div>
+            <div className="text-sm text-gray-600">Expert Doctors</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">24/7</div>
+            <div className="text-sm text-gray-600">Emergency Care</div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Right column is empty on desktop because the bg image fills the area.
+              Keep this div if you want the grid to reserve space for the image area on lg+. */}
+      <div className="hidden lg:block"></div>
+    </div>
+  </div>
+</section>
+
 
       {/* Services Section */}
       <section id="services" className="py-20 bg-white">
