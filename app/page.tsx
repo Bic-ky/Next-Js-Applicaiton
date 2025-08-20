@@ -1,85 +1,373 @@
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Image from "next/image";
-import Link from "next/link";
+'use client'
+
+import { useState, useEffect } from 'react'
+import { 
+  HeartIcon, 
+  LightBulbIcon, 
+  ChartBarIcon, 
+  VideoCameraIcon,
+  UserIcon,
+  StarIcon,
+  CheckIcon,
+  ClockIcon,
+  CalendarIcon,
+  PhoneIcon
+} from '@heroicons/react/24/outline'
+
+// Service data
+const services = [
+  {
+    id: 1,
+    name: 'Primary Care',
+    description: 'Comprehensive primary healthcare services including preventive care, health screenings, and chronic disease management.',
+    icon: HeartIcon,
+    gradient: 'from-blue-50 to-primary-50',
+    iconGradient: 'from-primary-500 to-primary-600',
+    buttonColor: 'text-primary-600 hover:text-primary-700',
+  },
+  {
+    id: 2,
+    name: 'Specialist Care',
+    description: 'Access to board-certified specialists in cardiology, dermatology, orthopedics, and other medical specialties.',
+    icon: LightBulbIcon,
+    gradient: 'from-teal-50 to-green-50',
+    iconGradient: 'from-teal-500 to-teal-600',
+    buttonColor: 'text-teal-600 hover:text-teal-700',
+  },
+  {
+    id: 3,
+    name: 'Advanced Diagnostics',
+    description: 'State-of-the-art diagnostic imaging, laboratory services, and cutting-edge medical technology for accurate diagnosis.',
+    icon: ChartBarIcon,
+    gradient: 'from-purple-50 to-pink-50',
+    iconGradient: 'from-purple-500 to-purple-600',
+    buttonColor: 'text-purple-600 hover:text-purple-700',
+  },
+  {
+    id: 4,
+    name: 'Telemedicine',
+    description: 'Convenient virtual consultations and remote monitoring services for accessible healthcare from anywhere.',
+    icon: VideoCameraIcon,
+    gradient: 'from-orange-50 to-red-50',
+    iconGradient: 'from-orange-500 to-orange-600',
+    buttonColor: 'text-orange-600 hover:text-orange-700',
+  },
+]
+
+// Doctor data
+const doctors = [
+  {
+    id: 1,
+    name: 'Dr. Sarah Johnson',
+    specialty: 'Cardiologist',
+    experience: '15+ years of experience in cardiovascular medicine and preventive cardiology.',
+    rating: 4.9,
+    gradient: 'from-primary-500 to-teal-500',
+    buttonColor: 'text-primary-600 hover:text-primary-700',
+  },
+  {
+    id: 2,
+    name: 'Dr. Michael Chen',
+    specialty: 'Orthopedic Surgeon',
+    experience: 'Specializing in joint replacement and sports medicine with 12+ years experience.',
+    rating: 4.8,
+    gradient: 'from-teal-500 to-green-500',
+    buttonColor: 'text-teal-600 hover:text-teal-700',
+  },
+  {
+    id: 3,
+    name: 'Dr. Emily Rodriguez',
+    specialty: 'Pediatrician',
+    experience: 'Compassionate pediatric care with expertise in child development and family medicine.',
+    rating: 5.0,
+    gradient: 'from-purple-500 to-pink-500',
+    buttonColor: 'text-purple-600 hover:text-purple-700',
+  },
+]
+
+// Testimonials data
+const testimonials = [
+  {
+    id: 1,
+    name: 'Jennifer Davis',
+    initials: 'JD',
+    content: 'The care I received at Reynolds Clinic was exceptional. Dr. Johnson took the time to listen to my concerns and provided a comprehensive treatment plan. The staff was friendly and professional throughout my visit.',
+    rating: 5,
+    gradient: 'from-blue-50 to-primary-50',
+    avatarGradient: 'from-primary-500 to-primary-600',
+  },
+  {
+    id: 2,
+    name: 'Mark Thompson',
+    initials: 'MT',
+    content: 'I had my knee surgery with Dr. Chen and the results exceeded my expectations. The entire team made sure I was comfortable and well-informed throughout the process. Highly recommend!',
+    rating: 4,
+    gradient: 'from-teal-50 to-green-50',
+    avatarGradient: 'from-teal-500 to-teal-600',
+  },
+  {
+    id: 3,
+    name: 'Amanda Lee',
+    initials: 'AL',
+    content: 'Dr. Rodriguez has been amazing with my daughter. She makes every visit comfortable and educational. The pediatric department at Reynolds Clinic is top-notch with caring staff.',
+    rating: 5,
+    gradient: 'from-purple-50 to-pink-50',
+    avatarGradient: 'from-purple-500 to-purple-600',
+  },
+]
+
+// Star rating component
+const StarRating = ({ rating }: { rating: number }) => {
+  return (
+    <div className="flex">
+      {[...Array(5)].map((_, i) => (
+        <StarIcon
+          key={i}
+          className={`w-4 h-4 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+          fill="currentColor"
+        />
+      ))}
+    </div>
+  )
+}
 
 export default function HomePage() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
   return (
     <>
-      <Navbar />
+      {/* Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-teal-50 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary-200/30 to-teal-200/30 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-200/30 to-primary-200/30 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Content */}
+            <div className="animate-slide-up">
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-100 to-blue-100 rounded-full text-sm font-medium text-teal-700 mb-6">
+                <CheckIcon className="w-4 h-4 mr-2" />
+                Trusted Healthcare Since 1985
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                Your Health is Our
+                <span className="text-gradient-primary block">
+                  Priority
+                </span>
+              </h1>
+              
+              <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
+                Experience comprehensive healthcare with our team of expert doctors, advanced diagnostics, and personalized treatment plans. We're committed to providing exceptional medical care when you need it most.
+              </p>
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center focus-visible:focus">
+                  <CalendarIcon className="w-5 h-5 mr-2" />
+                  Book Appointment
+                </button>
+                <button className="group btn-secondary flex items-center justify-center">
+                  <VideoCameraIcon className="w-5 h-5 mr-2" />
+                  Virtual Consultation
+                </button>
+              </div>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
+                <div className="text-center">
+                  <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">15K+</div>
+                  <div className="text-sm text-gray-600">Happy Patients</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">50+</div>
+                  <div className="text-sm text-gray-600">Expert Doctors</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl lg:text-3xl font-bold text-primary-600 mb-1">24/7</div>
+                  <div className="text-sm text-gray-600">Emergency Care</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Column - Visual */}
+            <div className="relative animate-fade-in">
+              <div className="relative">
+                <div className="bg-gradient-to-br from-primary-100 to-teal-100 rounded-3xl p-8 lg:p-12">
+                  {/* Placeholder for doctor/clinic image */}
+                  <div className="bg-gradient-primary rounded-2xl h-96 flex items-center justify-center">
+                    <svg className="w-24 h-24 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Floating Cards */}
+                <div className="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-4 animate-float">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <CheckIcon className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm">Health Checkup</p>
+                      <p className="text-xs text-gray-500">Completed</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 animate-float delay-2000">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <ClockIcon className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm">Appointment</p>
+                      <p className="text-xs text-gray-500">Today 2:00 PM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              Expert Medical Care, <span className="text-blue-600">Personalized</span> for You
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Comprehensive healthcare services with expert doctors and advanced diagnostics.
+      {/* Services Section */}
+      <section id="services" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Our <span className="text-gradient-primary">Services</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Comprehensive healthcare services delivered by experienced professionals using state-of-the-art technology and evidence-based practices.
             </p>
-            <div className="mt-6 flex gap-3">
-              <Link
-                href="/book"
-                className="rounded-xl px-5 py-3 bg-blue-600 text-white hover:bg-blue-700"
-              >
-                Book Appointment
-              </Link>
-              <Link
-                href="/services"
-                className="rounded-xl px-5 py-3 border hover:bg-gray-50"
-              >
-                View Services
-              </Link>
-            </div>
           </div>
-          <div className="relative h-72 md:h-[420px]">
-            <Image
-              src="https://reynoldsclinic.com/images/clinic-hero.jpg"
-              alt="Reynolds Clinic"
-              fill
-              className="object-cover rounded-2xl shadow-xl"
-              priority
-            />
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service) => (
+              <div key={service.id} className={`group service-card bg-gradient-to-br ${service.gradient}`}>
+                <div className={`w-12 h-12 bg-gradient-to-br ${service.iconGradient} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <service.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.name}</h3>
+                <p className="text-gray-600 mb-4">{service.description}</p>
+                <button className={`${service.buttonColor} font-medium transition-colors`}>
+                  Learn More →
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Feature grid */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <h2 className="text-2xl md:text-3xl font-semibold">Why Choose Reynolds Clinic</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { title: "Expert Doctors", desc: "Board-certified specialists across key disciplines." },
-            { title: "Advanced Diagnostics", desc: "Modern lab & imaging for accurate results." },
-            { title: "Telemedicine", desc: "Convenient online consultations from anywhere." },
-            { title: "Personalized Care", desc: "Plans tailored to your unique health goals." },
-          ].map((f) => (
-            <div key={f.title} className="p-6 border rounded-2xl hover:shadow-md transition">
-              <h3 className="font-medium">{f.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{f.desc}</p>
-            </div>
-          ))}
+      {/* Featured Doctors Section */}
+      <section id="doctors" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Meet Our Expert <span className="text-gradient-primary">Doctors</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Our team of board-certified physicians and specialists are dedicated to providing exceptional healthcare with compassion and expertise.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {doctors.map((doctor) => (
+              <div key={doctor.id} className="group doctor-card">
+                <div className={`h-64 bg-gradient-to-br ${doctor.gradient} flex items-center justify-center`}>
+                  <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center">
+                    <UserIcon className="w-12 h-12 text-white" />
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
+                  <p className={`${doctor.buttonColor.split(' ')[0]} font-medium mb-2`}>{doctor.specialty}</p>
+                  <p className="text-gray-600 text-sm mb-4">{doctor.experience}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-1">
+                      <StarRating rating={doctor.rating} />
+                      <span className="text-sm text-gray-500 ml-1">{doctor.rating}</span>
+                    </div>
+                    <button className={`${doctor.buttonColor} font-medium transition-colors`}>
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <button className="bg-gradient-to-r from-primary-600 to-teal-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-primary-700 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus-visible:focus">
+              View All Doctors
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="rounded-2xl border p-8 md:p-12 text-center">
-          <h3 className="text-2xl md:text-3xl font-semibold">Ready to take control of your health?</h3>
-          <p className="mt-2 text-muted-foreground">
-            Schedule an appointment with our care team today.
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              What Our Patients <span className="text-gradient-primary">Say</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Read testimonials from our satisfied patients who have experienced exceptional care at Reynolds Clinic.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.id} className={`group testimonial-card bg-gradient-to-br ${testimonial.gradient}`}>
+                <div className="flex items-center mb-4">
+                  <div className={`w-12 h-12 bg-gradient-to-br ${testimonial.avatarGradient} rounded-full flex items-center justify-center mr-4`}>
+                    <span className="text-white font-bold text-lg">{testimonial.initials}</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                    <StarRating rating={testimonial.rating} />
+                  </div>
+                </div>
+                <p className="text-gray-600 italic">"{testimonial.content}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-primary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Ready to Take Control of Your Health?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            Schedule your appointment today and experience the difference that personalized, compassionate healthcare can make in your life.
           </p>
-          <Link
-            href="/book"
-            className="inline-block mt-6 rounded-xl px-6 py-3 bg-blue-600 text-white hover:bg-blue-700"
-          >
-            Book Now
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center focus-visible:focus">
+              <PhoneIcon className="w-5 h-5 mr-2" />
+              Call (555) REYNOLDS
+            </button>
+            <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary-600 transition-all duration-300 flex items-center justify-center focus-visible:focus">
+              <CalendarIcon className="w-5 h-5 mr-2" />
+              Book Online
+            </button>
+          </div>
         </div>
       </section>
-
-      <Footer />
     </>
-  );
+  )
 }
