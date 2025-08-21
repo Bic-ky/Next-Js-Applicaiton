@@ -1,118 +1,208 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 const navigation = [
-  { name: 'Home', href: '#home' },
-  { name: 'Services', href: '#services' },
+  { name: 'Home', href: '/' },
+  {
+    name: 'Services',
+    href: '/services',
+    dropdown: [
+      { name: 'Drug Rehabilitation', href: '/services/drug-rehabilitation' },
+      { name: 'Weight Management', href: '/services/weight-management' },
+      { name: 'Men\'s Health', href: '/services/mens-health' },
+      { name: 'Injury Treatment', href: '/services/injury-treatment' },
+      { name: 'Hormone Therapy', href: '/services/hormone-therapy' },
+    ],
+  },
   { name: 'Doctors', href: '#doctors' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
-]
+];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10
-      setScrolled(isScrolled)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
+    if (!href.startsWith('#')) return;
+    const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    setMobileMenuOpen(false)
-  }
+    setMobileMenuOpen(false);
+  };
+
+  const isActive = (itemHref: string) => pathname === itemHref;
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'backdrop-blur-nav shadow-lg' : 'bg-white/95'
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-nav shadow-lg bg-white/95' : 'bg-white/95'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-              <svg 
-                className="w-6 h-6 text-white" 
-                fill="currentColor" 
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
             <span className="text-xl lg:text-2xl font-bold text-gray-900">
               Reynolds<span className="text-teal-500">Clinic</span>
             </span>
           </Link>
-          
-          {/* Desktop Navigation */}
+
+          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 focus-visible:focus"
-              >
-                {item.name}
-              </button>
-            ))}
-            <button className=" group btn-primary focus-visible:focus">
-              Patient Portal
-            </button>
+            {navigation.map((item) => {
+              if (item.dropdown) {
+                return (
+                  <div
+                    key={item.name}
+                    className="relative"
+                    onClick={() => setOpenDropdown(item.name)}
+                  >
+                    <button className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">
+                      {item.name}
+                      <ChevronDownIcon className="w-4 h-4 ml-1 transition-transform" aria-hidden="true" />
+                    </button>
+                    {openDropdown === item.name && (
+                      <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 py-1">
+                        {item.dropdown.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              if (item.href.startsWith('#')) {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.href)}
+                    className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
+                  >
+                    {item.name}
+                  </button>
+                );
+              }
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`font-medium transition-colors duration-200 ${
+                    isActive(item.href)
+                      ? 'text-primary-600 border-b-2 border-primary-600'
+                      : 'text-gray-700 hover:text-primary-600'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
-          
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors focus-visible:focus"
-            aria-expanded="false"
-            aria-label="Toggle navigation menu"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
           >
             {mobileMenuOpen ? (
-              <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+              <XMarkIcon className="w-6 h-6" />
             ) : (
-              <Bars3Icon className="w-6 h-6" aria-hidden="true" />
+              <Bars3Icon className="w-6 h-6" />
             )}
           </button>
         </div>
       </div>
-      
+
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t shadow-lg">
           <div className="px-4 py-6 space-y-4">
-            {navigation.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2 transition-colors focus-visible:focus"
-              >
-                {item.name}
-              </button>
-            ))}
-            <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-3 rounded-lg font-medium hover:from-primary-700 hover:to-primary-800 transition-all duration-300 focus-visible:focus">
-              Patient Portal
-            </button>
+            {navigation.map((item) => {
+              if (item.dropdown) {
+                return (
+                  <div key={item.name}>
+                    <button
+                      onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}
+                      className="block w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2 flex items-center justify-between"
+                    >
+                      {item.name}
+                      <ChevronDownIcon className={`w-4 h-4 transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`} />
+                    </button>
+                    {openDropdown === item.name && (
+                      <div className="mt-2 space-y-2 pl-4 border-l-2 border-gray-200">
+                        {item.dropdown.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="block text-sm text-gray-600 hover:text-primary-600"
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setOpenDropdown(null);
+                            }}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              if (item.href.startsWith('#')) {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.href)}
+                    className="block w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2"
+                  >
+                    {item.name}
+                  </button>
+                );
+              }
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}
     </nav>
-  )
+  );
 }
