@@ -205,10 +205,6 @@ export default function HomePage() {
             <CalendarIcon className="w-5 h-5 mr-2" />
             Book Appointment
           </button>
-          <button className="group btn-secondary flex items-center justify-center">
-            <VideoCameraIcon className="w-5 h-5 mr-2" />
-            Virtual Consultation
-          </button>
         </div>
 
         {/* Stats */}

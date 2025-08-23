@@ -19,7 +19,7 @@ const navigation = [
       { name: 'Hormone Therapy', href: '/services/hormone-therapy' },
     ],
   },
-  { name: 'Doctors', href: '#doctors' },
+  { name: 'Doctors', href: '/doctors' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -47,7 +47,7 @@ export default function Navbar() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, []);
 
   const scrollToSection = (href: string) => {
     if (!href.startsWith('#')) return;
@@ -59,6 +59,12 @@ export default function Navbar() {
   };
 
   const isActive = (itemHref: string) => pathname === itemHref;
+
+  const handleDropdownToggle = (e: React.MouseEvent, itemName: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpenDropdown(openDropdown === itemName ? null : itemName);
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-nav shadow-lg bg-white/95' : 'bg-white/95'}`}>
@@ -79,19 +85,25 @@ export default function Navbar() {
                   <div
                     key={item.name}
                     className="relative"
-                    onClick={() => setOpenDropdown(item.name)}
+                    ref={dropdownRef}
                   >
-                    <button className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">
+                    <button 
+                      onClick={(e) => handleDropdownToggle(e, item.name)}
+                      className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
+                    >
                       {item.name}
-                      <ChevronDownIcon className="w-4 h-4 ml-1 transition-transform" aria-hidden="true" />
+                      <ChevronDownIcon 
+                        className={`w-4 h-4 ml-1 transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`} 
+                        aria-hidden="true" 
+                      />
                     </button>
                     {openDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 py-1">
+                      <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 py-1 z-50">
                         {item.dropdown.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
                             onClick={() => setOpenDropdown(null)}
                           >
                             {subItem.name}
@@ -153,7 +165,7 @@ export default function Navbar() {
                   <div key={item.name}>
                     <button
                       onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}
-                      className="block w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2 flex items-center justify-between"
+                      className="w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2 flex items-center justify-between"
                     >
                       {item.name}
                       <ChevronDownIcon className={`w-4 h-4 transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`} />
@@ -164,7 +176,7 @@ export default function Navbar() {
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className="block text-sm text-gray-600 hover:text-primary-600"
+                            className="block text-sm text-gray-600 hover:text-primary-600 transition-colors duration-150"
                             onClick={() => {
                               setMobileMenuOpen(false);
                               setOpenDropdown(null);
