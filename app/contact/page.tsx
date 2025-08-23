@@ -15,7 +15,7 @@ const contactInfo = {
   email: 'info@reynoldsclinic.com',
   address: {
     street: '1234 Medical Center Drive',
-    city: 'Beverly Hills',
+    city: 'Toledo, Ohio',
     state: 'CA',
     zip: '90210'
   },
@@ -317,7 +317,7 @@ export default function ContactPage() {
               Visit Our Clinic
             </h2>
             <p className="text-xl text-gray-600">
-              Conveniently located in Beverly Hills with easy access and free parking
+              Conveniently located in Toledo with easy access and free parking
             </p>
           </div>
 
@@ -325,7 +325,7 @@ export default function ContactPage() {
             {/* Embedded Map */}
             <div className="h-96 md:h-[500px] w-full">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.764810653267!2d-118.40024308478842!3d34.07362268060791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc04d6d147ab%3A0x1f8a1c89cedcdc2c!2sBeverly%20Hills%2C%20CA%2090210%2C%20USA!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m27!1m12!1m3!1d95374.89826998046!2d-83.74996980262704!3d41.667287573743295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m12!3e6!4m4!1s0x883c7ead6b07cd65%3A0xdc1bcf4f45b138fc!3m2!1d41.667317!2d-83.667569!4m5!1s0x883c7ead6b07cd65%3A0xdc1bcf4f45b138fc!2s2450%20N%20Reynolds%20Rd%20A%2C%20Toledo%2C%20OH%2043615%2C%20United%20States!3m2!1d41.667317!2d-83.667569!5e0!3m2!1sen!2snp!4v1755966614945!5m2!1sen!2snp"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -341,7 +341,7 @@ export default function ContactPage() {
                 <div className="text-center">
                   <MapPinIcon className="w-8 h-8 text-teal-600 mx-auto mb-3" />
                   <h3 className="font-semibold text-gray-900 mb-2">Easy to Find</h3>
-                  <p className="text-gray-600 text-sm">Located in the heart of Beverly Hills medical district</p>
+                  <p className="text-gray-600 text-sm">Located in the heart of Toledo, Ohio</p>
                 </div>
                 <div className="text-center">
                   <svg className="w-8 h-8 text-teal-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
