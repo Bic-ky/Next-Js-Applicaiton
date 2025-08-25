@@ -8,7 +8,7 @@ const doctors = [
     specialties: ['Internal Medicine', 'Addiction Medicine', 'Preventive Care'],
     education: 'Harvard Medical School, MD',
     experience: '20+ years',
-    image: '/api/placeholder/400/400',
+    image: '/doctors/doc.png',
     bio: 'Leading expert in comprehensive internal medicine with specialized training in addiction treatment and preventive healthcare.',
   },
   {
@@ -17,7 +17,7 @@ const doctors = [
     specialties: ['Endocrinology', 'Weight Management', 'Metabolic Medicine'],
     education: 'Johns Hopkins University, MD',
     experience: '15+ years',
-    image: '/api/placeholder/400/400',
+    image: '/doctors/doc.png',
     bio: 'Board-certified endocrinologist specializing in medical weight loss and metabolic disorders with proven success rates.',
   },
   {
@@ -26,7 +26,7 @@ const doctors = [
     specialties: ['Men\'s Health', 'Hormone Therapy', 'Sexual Medicine'],
     education: 'Mayo Clinic, MD',
     experience: '18+ years',
-    image: '/api/placeholder/400/400',
+    image: '/doctors/doc.png',
     bio: 'Dedicated men\'s health physician with expertise in hormone optimization and sexual wellness treatments.',
   },
   {
@@ -35,7 +35,7 @@ const doctors = [
     specialties: ['Sports Medicine', 'Orthopedics', 'Rehabilitation'],
     education: 'Stanford Medical School, MD',
     experience: '12+ years',
-    image: '/api/placeholder/400/400',
+    image: '/doctors/doc.png',
     bio: 'Former team physician with extensive experience in sports injuries, rehabilitation, and performance optimization.',
   },
   {
@@ -44,7 +44,7 @@ const doctors = [
     specialties: ['Hormone Therapy', 'Anti-Aging', 'Integrative Medicine'],
     education: 'UCLA Medical School, MD',
     experience: '16+ years',
-    image: '/api/placeholder/400/400',
+    image: '/doctors/doc.png',
     bio: 'Pioneer in bioidentical hormone therapy and anti-aging medicine with thousands of successful patient outcomes.',
   },
   {
@@ -53,7 +53,7 @@ const doctors = [
     specialties: ['Family Medicine', 'Women\'s Health', 'Preventive Care'],
     education: 'University of Michigan, MD',
     experience: '14+ years',
-    image: '/api/placeholder/400/400',
+    image: '/doctors/doc.png',
     bio: 'Compassionate family physician specializing in comprehensive women\'s healthcare and family wellness programs.',
   },
 ];
@@ -103,7 +103,7 @@ export default function Doctors() {
                     src={doctor.image}
                     alt={`Dr. ${doctor.name} - ${doctor.title}`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
                 
