@@ -78,7 +78,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden text-lg lg:flex items-center space-x-8">
             {navigation.map((item) => {
               if (item.dropdown) {
                 return (
