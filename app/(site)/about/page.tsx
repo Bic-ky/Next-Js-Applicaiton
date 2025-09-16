@@ -5,66 +5,56 @@ import {
   ShieldCheckIcon, 
   UserGroupIcon, 
   AcademicCapIcon,
-  TrophyIcon,
-  ClockIcon 
+  TrophyIcon
 } from '@heroicons/react/24/outline';
 
 const stats = [
-  { number: '25+', label: 'Years of Excellence' },
-  { number: '50,000+', label: 'Patients Treated' },
-  { number: '98%', label: 'Patient Satisfaction' },
-  { number: '15+', label: 'Medical Specialists' }
+  // Paraphrased / genericized stats; keep or replace with owned exact figures
+  { number: '25+', label: 'Years Serving Toledo' },
+  { number: '5000+', label: 'Patient Visits Completed' },
+  { number: '98%', label: 'Positive Patient Feedback' },
+  { number: '15+', label: 'Clinicians & Specialists' }
 ];
 
 const values = [
   {
     icon: HeartIcon,
     title: 'Compassionate Care',
-    description: 'We treat every patient with empathy, respect, and genuine concern for their wellbeing.'
+    description:
+      // Paraphrase of “we treat patients with empathy and respect”
+      'Every visit is grounded in respect, empathy, and genuine concern for your well-being.'
   },
   {
     icon: ShieldCheckIcon,
-    title: 'Medical Excellence',
-    description: 'Our board-certified physicians use the latest medical advances and evidence-based treatments.'
+    title: 'Clinical Excellence',
+    description:
+      // Paraphrase of “board-certified physicians + evidence-based”
+      'Board-certified providers use proven, up-to-date treatments tailored to your needs.'
   },
   {
     icon: UserGroupIcon,
     title: 'Patient-Centered',
-    description: 'Your health goals and comfort are at the center of everything we do.'
+    description:
+      // Paraphrase of “your goals at the center”
+      'Your goals guide the plan—from first consult through follow-up and long-term care.'
   },
   {
     icon: AcademicCapIcon,
-    title: 'Continuous Learning',
-    description: 'We stay at the forefront of medical innovation through ongoing education and research.'
+    title: 'Always Learning',
+    description:
+      // Paraphrase of “ongoing education & innovation”
+      'We continually refine our approach through ongoing training and medical advances.'
   }
 ];
 
 const milestones = [
-  {
-    year: '1998',
-    title: 'Foundation',
-    description: 'Dr. Michael Reynolds establishes the clinic with a vision of personalized healthcare.'
-  },
-  {
-    year: '2005',
-    title: 'Expansion',
-    description: 'Added specialized services including addiction medicine and weight management.'
-  },
-  {
-    year: '2012',
-    title: 'Innovation',
-    description: 'Introduced cutting-edge hormone therapy and men\'s health programs.'
-  },
-  {
-    year: '2020',
-    title: 'Modern Era',
-    description: 'Launched comprehensive injury treatment and sports medicine services.'
-  },
-  {
-    year: '2024',
-    title: 'Excellence',
-    description: 'Recognized as a leading medical practice with state-of-the-art facilities.'
-  }
+  // Paraphrased timeline milestones; adjust dates/titles if you own exact claims
+  // Change this in `milestones`:
+{ year: '1998', title: 'Foundation', description: 'Munir Ahmad establishes the clinic with a vision of personalized healthcare.' },
+  { year: '2005', title: 'Specialty Growth', description: 'Expanded to include addiction care, weight management, and related services.' },
+  { year: '2012', title: 'Innovation', description: 'Introduced advanced hormone therapy and comprehensive men’s health programs.' },
+  { year: '2020', title: 'Modernization', description: 'Broadened injury evaluation and rehabilitation with coordinated support.' },
+  { year: '2024', title: 'Recognition', description: 'Recognized locally for modern facilities and consistent, quality outcomes.' }
 ];
 
 export default function AboutPage() {
@@ -84,10 +74,12 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                {/* TODO: replace with exact site headline if you own rights */}
                 About Reynolds Clinic
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-8">
-                Dedicated to providing exceptional, personalized healthcare for over 25 years
+                {/* Paraphrase of hero subheading */}
+                Personalized, high-quality medical care for the Toledo community for over two decades.
               </p>
               <Link
                 href="#contact"
@@ -127,13 +119,19 @@ export default function AboutPage() {
                 Our Story
               </h2>
               <p className="text-lg text-gray-700 mb-6">
-                Founded in 1998 by Dr. Michael Reynolds, Reynolds Clinic began with a simple yet powerful vision: to provide personalized, compassionate healthcare that treats the whole person, not just symptoms.
+                {/* Paraphrase of intro paragraph */}
+                Founded with a simple idea—treat the whole person—Reynolds Clinic has grown into a
+                trusted medical home for families across Toledo.
               </p>
               <p className="text-lg text-gray-700 mb-6">
-                Over the past 25 years, we've grown from a small family practice to a comprehensive medical facility specializing in addiction medicine, weight management, men's health, injury treatment, and hormone therapy.
+                {/* Paraphrase of breadth/services */}
+                What began as a small practice now delivers coordinated care across addiction medicine,
+                medical weight management, men’s health, injury treatment, and hormone therapy.
               </p>
               <p className="text-lg text-gray-700 mb-8">
-                Our commitment to excellence, continuous innovation, and patient-centered care has made us a trusted healthcare partner for thousands of individuals and families.
+                {/* Paraphrase of commitment */}
+                Our team pairs compassion with evidence-based medicine so patients get clear answers,
+                practical plans, and steady follow-through.
               </p>
               <Link
                 href="/doctors"
@@ -148,7 +146,7 @@ export default function AboutPage() {
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/api/placeholder/300/300"
-                      alt="Dr. Reynolds with patient consultation"
+                      alt="Patient consultation"
                       fill
                       className="object-cover"
                     />
@@ -156,7 +154,7 @@ export default function AboutPage() {
                   <div className="relative h-32 rounded-lg overflow-hidden">
                     <Image
                       src="/api/placeholder/300/200"
-                      alt="Modern medical equipment at Reynolds Clinic"
+                      alt="Modern medical equipment"
                       fill
                       className="object-cover"
                     />
@@ -166,7 +164,7 @@ export default function AboutPage() {
                   <div className="relative h-32 rounded-lg overflow-hidden">
                     <Image
                       src="/api/placeholder/300/200"
-                      alt="Reynolds Clinic reception area"
+                      alt="Clinic reception area"
                       fill
                       className="object-cover"
                     />
@@ -174,7 +172,7 @@ export default function AboutPage() {
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/api/placeholder/300/300"
-                      alt="Medical team collaboration at Reynolds Clinic"
+                      alt="Clinical team collaboration"
                       fill
                       className="object-cover"
                     />
@@ -186,6 +184,53 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Founder Section */}
+      <section id="founder" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
+            {/* Founder Photo */}
+            <div className="relative h-72 w-full rounded-xl overflow-hidden shadow-lg lg:col-span-1">
+              {/* Replace with your actual image path if available */}
+              <Image
+                src="/api/placeholder/500/600"
+                alt="Munir Ahmad, Founder of Reynolds Clinic"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+
+            {/* Founder Copy */}
+            <div className="lg:col-span-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                About the Founder
+              </h2>
+              <p className="text-teal-600 font-semibold mb-4">
+                Munir Ahmad — Founder
+              </p>
+
+              <div className="space-y-5 text-lg text-gray-700 leading-relaxed">
+                <p>
+                  Hello, I'm Munir Ahmad, the founder of Reynolds Clinic. With a passion for
+                  health and wellness, I established this clinic to provide comprehensive
+                  and compassionate care to individuals in Toledo and beyond.
+                </p>
+                <p>
+                  My experience in the health industry has equipped me with the knowledge
+                  and skills to address the unique challenges faced by our clients, from
+                  addiction recovery to injury rehabilitation.
+                </p>
+                <p>
+                  I am committed to creating a supportive and confidential environment where
+                  clients can confidently take control of their health journeys.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* Our Values Section */}
       <section className="py-16 md:py-24 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -194,7 +239,8 @@ export default function AboutPage() {
               Our Core Values
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              These principles guide everything we do and shape the exceptional care we provide
+              {/* Paraphrase of value intro */}
+              Principles that shape how we care for you—from first visit to long-term follow-up.
             </p>
           </div>
           
@@ -224,16 +270,16 @@ export default function AboutPage() {
               Our State-of-the-Art Facility
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Modern, comfortable spaces designed with your health and wellbeing in mind
+              {/* Paraphrase of facility intro */}
+              Comfortable spaces and modern equipment designed for efficient, thorough care.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
             <div className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <Image
                 src="/about/laboratory.png"
-                alt="Advanced medical laboratory and diagnostic equipment"
+                alt="Advanced laboratory and diagnostic equipment"
                 fill
                 className="object-contain"
               />
@@ -241,11 +287,10 @@ export default function AboutPage() {
                 <h3 className="text-white font-semibold">Advanced Laboratory</h3>
               </div>
             </div>
-            
             <div className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <Image
                 src="/about/rehabilitation.png"
-                alt="Physical therapy and rehabilitation treatment room"
+                alt="Rehabilitation treatment room"
                 fill
                 className="object-cover"
               />
@@ -253,11 +298,10 @@ export default function AboutPage() {
                 <h3 className="text-white font-semibold">Rehabilitation Suite</h3>
               </div>
             </div>
-            
             <div className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <Image
                 src="/about/pharmacy.png"
-                alt="Pharmacy and medication management area"
+                alt="On-site pharmacy area"
                 fill
                 className="object-cover"
               />
@@ -265,11 +309,10 @@ export default function AboutPage() {
                 <h3 className="text-white font-semibold">On-Site Pharmacy</h3>
               </div>
             </div>
-            
             <div className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <Image
                 src="/about/recovering.png"
-                alt="Comfortable recovery room for post-treatment care"
+                alt="Comfortable recovery room"
                 fill
                 className="object-cover"
               />
@@ -289,14 +332,14 @@ export default function AboutPage() {
               Our Journey of Excellence
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              25 years of continuous growth, innovation, and commitment to patient care
+              {/* Paraphrase of timeline intro */}
+              A steady path of growth, innovation, and commitment to patients.
             </p>
           </div>
           
           <div className="relative">
             {/* Timeline line - Desktop */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-teal-500 h-full hidden md:block"></div>
-            
             {/* Timeline line - Mobile */}
             <div className="absolute left-8 top-0 w-1 bg-teal-500 h-full md:hidden"></div>
             
@@ -306,10 +349,7 @@ export default function AboutPage() {
                   
                   {/* Mobile Layout */}
                   <div className="md:hidden flex items-start space-x-6">
-                    {/* Mobile Timeline dot */}
                     <div className="w-6 h-6 bg-teal-500 rounded-full border-4 border-white shadow-lg flex-shrink-0 mt-1 relative z-10"></div>
-                    
-                    {/* Mobile Content */}
                     <div className="flex-1">
                       <div className="bg-white p-6 rounded-xl shadow-lg">
                         <div className="text-2xl font-bold text-teal-600 mb-2">
@@ -340,9 +380,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   
-                  {/* Desktop Timeline dot */}
                   <div className="hidden md:block w-6 h-6 bg-teal-500 rounded-full border-4 border-white shadow-lg relative z-10"></div>
-                  
                   <div className="hidden md:block w-full md:w-5/12"></div>
                 </div>
               ))}
@@ -359,69 +397,44 @@ export default function AboutPage() {
               Awards & Recognition
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our commitment to excellence has been recognized by leading medical organizations
+              {/* Paraphrase general statement */}
+              Our team’s focus on safety, compassion, and outcomes has earned local recognition.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Keep generic award shells; replace with owned/verified entities if desired */}
             <div className="text-center p-8 bg-blue-50 rounded-xl">
               <TrophyIcon className="w-16 h-16 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Top Medical Practice 2023
+                Community Recognition
               </h3>
               <p className="text-gray-700">
-                Beverly Hills Medical Association Excellence Award
+                Highlighting consistent patient experiences and quality care.
               </p>
             </div>
-            
             <div className="text-center p-8 bg-teal-50 rounded-xl">
               <ShieldCheckIcon className="w-16 h-16 text-teal-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Patient Safety Excellence
+                Patient Safety Focus
               </h3>
               <p className="text-gray-700">
-                California Department of Health Recognition
+                Recognized for safe, reliable, and coordinated care practices.
               </p>
             </div>
-            
             <div className="text-center p-8 bg-blue-50 rounded-xl">
               <HeartIcon className="w-16 h-16 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Compassionate Care Award
+                Compassion in Care
               </h3>
               <p className="text-gray-700">
-                National Healthcare Quality Foundation
+                Celebrating a culture of empathy and clear communication.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-600 to-blue-600">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Experience the Reynolds Clinic Difference
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Join thousands of patients who have chosen us for their healthcare journey. Discover personalized, compassionate care that puts you first.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="#contact"
-              className="inline-block bg-white hover:bg-gray-100 text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-            >
-              Schedule Consultation
-            </Link>
-            <Link
-              href="/services"
-              className="inline-block bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors border-2 border-white"
-            >
-              Explore Services
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

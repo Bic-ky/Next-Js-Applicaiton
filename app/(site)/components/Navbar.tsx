@@ -20,7 +20,6 @@ const navigation = [
     ],
   },
   { name: 'Blogs', href: '/blog' },
-  { name: 'Doctors', href: '/doctors' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];

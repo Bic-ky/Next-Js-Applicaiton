@@ -352,8 +352,7 @@ export default function MedicalHealthcareSolutionsToledo() {
               </h1>
 
               <p className="speakable-summary text-lg sm:text-xl text-gray-700 mb-8">
-                Drug rehabilitation, medical weight loss, erectile dysfunction treatment, accident injury care,
-                and hormone replacement therapy — personalized for your goals.
+                Reynolds Clinic offers expert care in addiction recovery, medical weight loss, erectile dysfunction treatment, as well as personal injury and accident recovery. As one of the earliest and leading outpatient Suboxone clinics in Toledo, we provide personalized and compassionate care plans for men and women across Lucas County and nearby areas.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start">
@@ -491,23 +490,6 @@ export default function MedicalHealthcareSolutionsToledo() {
         </div>
       </section>
 
-      {/* Visit / Contact */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">Visit Reynolds Clinic</h3>
-          <p className="text-gray-700">{CLINIC_ADDRESS}</p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href={`tel:${CLINIC_PHONE_TEL}`}
-              className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center"
-            >
-              <PhoneIcon className="w-5 h-5 mr-2" />
-              Call {CLINIC_PHONE_DISPLAY}
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-teal-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -524,13 +506,6 @@ export default function MedicalHealthcareSolutionsToledo() {
             >
               <PhoneIcon className="w-5 h-5 mr-2" />
               Call {CLINIC_PHONE_DISPLAY}
-            </a>
-            <a
-              href="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center"
-            >
-              <CalendarIcon className="w-5 h-5 mr-2" />
-              Contact Us
             </a>
           </div>
         </div>

@@ -169,7 +169,7 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-                Schedule an Appointment
+                Contact Us
               </h2>
 
               {isSubmitted ? (
@@ -179,7 +179,7 @@ export default function ContactPage() {
                     Thank You!
                   </h3>
                   <p className="text-green-700">
-                    Your appointment request has been submitted. We'll contact you within 24 hours to confirm your appointment.
+                    We’ve received your message. Our team will reach out within 24 hours.
                   </p>
                 </div>
               ) : (
@@ -235,31 +235,33 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Service & Time */}
+                  {/* Topic & Preferred Contact Time */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="service" className="block text-sm font-semibold text-gray-900 mb-2">
-                        Service Needed *
+                        Regarding
                       </label>
                       <select
                         id="service"
                         name="service"
-                        required
                         value={formData.service}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       >
-                        <option value="">Select a service</option>
-                        {services.map((service, index) => (
-                          <option key={index} value={service}>
-                            {service}
+                        <option value="">Choose a topic</option>
+                        {(Array.isArray(services) && services.length
+                          ? services
+                          : ['General Question', 'Billing', 'Existing Appointment', 'Feedback']
+                        ).map((option: any, idx: number) => (
+                          <option key={idx} value={typeof option === 'string' ? option : option}>
+                            {typeof option === 'string' ? option : option}
                           </option>
                         ))}
                       </select>
                     </div>
                     <div>
                       <label htmlFor="preferredTime" className="block text-sm font-semibold text-gray-900 mb-2">
-                        Preferred Time
+                        Preferred Contact Time
                       </label>
                       <select
                         id="preferredTime"
@@ -268,7 +270,7 @@ export default function ContactPage() {
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       >
-                        <option value="">Select preferred time</option>
+                        <option value="">Select a time window</option>
                         <option value="morning">Morning (8AM - 12PM)</option>
                         <option value="afternoon">Afternoon (12PM - 4PM)</option>
                         <option value="evening">Evening (4PM - 6PM)</option>
@@ -279,7 +281,7 @@ export default function ContactPage() {
                   {/* Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-2">
-                      Additional Information
+                      Your Message
                     </label>
                     <textarea
                       id="message"
@@ -287,24 +289,26 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                      placeholder="Tell us about your concerns or questions..."
+                      placeholder="How can we help?"
+                      rows={5}
                     ></textarea>
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Submit */}
                   <button
                     type="submit"
                     className="w-full bg-teal-600 hover:bg-teal-700 text-white py-4 px-6 rounded-lg font-semibold text-lg transition-colors duration-200"
                   >
-                    Request Appointment
+                    Send Message
                   </button>
 
                   <p className="text-sm text-gray-600 text-center">
-                    * Required fields. We'll contact you within 24 hours to confirm your appointment.
+                    * Required fields. We’ll get back to you within 24 hours.
                   </p>
                 </form>
               )}
             </div>
+
           </div>
         </div>
       </section>
