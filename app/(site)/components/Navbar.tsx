@@ -19,6 +19,7 @@ const navigation = [
       { name: 'Hormone Therapy', href: '/services/hormone-therapy' },
     ],
   },
+  { name: 'Blogs', href: '/blog' },
   { name: 'Doctors', href: '/doctors' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
