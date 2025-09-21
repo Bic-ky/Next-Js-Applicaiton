@@ -141,6 +141,13 @@ export default function Navbar() {
             })}
           </div>
 
+          {/* Login Button */}
+          <div className="hidden lg:flex items-center ml-4">
+            <Link href="/login" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+              Login
+            </Link>
+          </div>
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -215,6 +222,13 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      <div className="lg:hidden border-t border-gray-200 px-4 py-4">
+        <Link href="/login" className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          Login
+        </Link>
+      </div>
     </nav>
   );
 }
