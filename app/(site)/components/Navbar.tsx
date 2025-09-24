@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { jwtDecode } from 'jwt-decode';
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { jwtDecode } from "jwt-decode";
 
 type JwtPayload = {
-  exp?: number;     // seconds since epoch
+  exp?: number; // seconds since epoch
   sub?: string;
   jti?: string;
   type?: string;
@@ -20,24 +20,25 @@ type NavItem =
   | { name: string; href: string; dropdown: { name: string; href: string }[] };
 
 const navigation: NavItem[] = [
-  { name: 'Home', href: '/' },
+  { name: "Home", href: "/" },
   {
-    name: 'Services',
-    href: '/services',
+    name: "Services",
+    href: "/services",
     dropdown: [
-      { name: 'Drug Rehabilitation', href: '/services/drug-rehabilitation' },
-      { name: 'Weight Management', href: '/services/weight-management' },
-      { name: "Men's Health", href: '/services/mens-health' },
-      { name: 'Injury Treatment', href: '/services/injury-treatment' },
-      { name: 'Hormone Therapy', href: '/services/hormone-therapy' },
+      { name: "Drug Rehabilitation", href: "/services/drug-rehabilitation" },
+      { name: "Weight Management", href: "/services/weight-management" },
+      { name: "Men's Health", href: "/services/mens-health" },
+      { name: "Injury Treatment", href: "/services/injury-treatment" },
+      { name: "Hormone Therapy", href: "/services/hormone-therapy" },
     ],
   },
-  { name: 'Blogs', href: '/blog' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Blogs", href: "/blog" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://127.0.0.1:8000';
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -54,13 +55,14 @@ export default function Navbar() {
   const logoutTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // One container ref—to close any open dropdown on outside click
-  const navContainerRef = useRef<HTMLDivElement | null>(null);
+  // IMPORTANT: Put the ref on <nav> so both desktop and mobile panels count as "inside"
+  const navContainerRef = useRef<HTMLElement | null>(null);
 
   // --- UI: scroll shadow ---
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // --- UI: click outside to close dropdowns ---
@@ -72,35 +74,35 @@ export default function Navbar() {
         setOpenDropdown(null);
       }
     };
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
   // --- Auth: setup on mount, watch cross-tab & visibility ---
   useEffect(() => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
     setupAuthFromToken(token);
 
     // Sync auth across tabs
     const onStorage = (e: StorageEvent) => {
-      if (e.key === 'accessToken') {
+      if (e.key === "accessToken") {
         setupAuthFromToken(e.newValue);
       }
     };
-    window.addEventListener('storage', onStorage);
+    window.addEventListener("storage", onStorage);
 
     // If the tab was hidden/asleep, re-check when visible
     const onVisibility = () => {
-      if (document.visibilityState === 'visible') {
-        const t = localStorage.getItem('accessToken');
+      if (document.visibilityState === "visible") {
+        const t = localStorage.getItem("accessToken");
         setupAuthFromToken(t, /*force*/ true);
       }
     };
-    document.addEventListener('visibilitychange', onVisibility);
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      window.removeEventListener('storage', onStorage);
-      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener("storage", onStorage);
+      document.removeEventListener("visibilitychange", onVisibility);
       if (logoutTimerRef.current) {
         clearTimeout(logoutTimerRef.current);
         logoutTimerRef.current = null;
@@ -148,46 +150,46 @@ export default function Navbar() {
         void handleLogout(false);
       }
     } catch (err) {
-      console.error('Invalid token decode:', err);
+      console.error("Invalid token decode:", err);
       await handleLogout(true);
     }
   };
 
   const handleLogout = async (skipServer = false) => {
     try {
-      const token = localStorage.getItem('accessToken') ?? undefined;
+      const token = localStorage.getItem("accessToken") ?? undefined;
       if (!skipServer && token) {
         // Best-effort revoke on the server; ignore errors
         await fetch(`${API_BASE}/users/logout`, {
-          method: 'POST',
+          method: "POST",
           headers: { Authorization: `Bearer ${token}` },
         }).catch(() => {});
       }
     } finally {
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem("accessToken");
       setIsAuthenticated(false);
       setMobileMenuOpen(false);
       if (logoutTimerRef.current) {
         clearTimeout(logoutTimerRef.current);
         logoutTimerRef.current = null;
       }
-      router.push('/');
+      router.push("/");
     }
   };
 
   // --- UI helpers ---
   const scrollToSection = (href: string) => {
-    if (!href.startsWith('#')) return;
+    if (!href.startsWith("#")) return;
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     setMobileMenuOpen(false);
   };
 
   // Highlight current route; for sections use startsWith to catch nested routes
   const isActive = (itemHref: string) => {
-    if (itemHref === '/') return pathname === '/';
+    if (itemHref === "/") return pathname === "/";
     return pathname?.startsWith(itemHref);
   };
 
@@ -198,11 +200,20 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-nav shadow-lg bg-white/95' : 'bg-white/95'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={navContainerRef}>
+    <nav
+      ref={navContainerRef} // <-- moved here so mobile panel is inside the click-boundary
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "backdrop-blur-nav shadow-lg bg-white/95" : "bg-white/95"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group" onClick={() => setOpenDropdown(null)}>
+          <Link
+            href="/"
+            className="flex items-center space-x-3 group"
+            onClick={() => setOpenDropdown(null)}
+          >
             <span className="text-xl lg:text-2xl font-bold text-gray-900">
               Reynolds<span className="text-teal-500">Clinic</span>
             </span>
@@ -211,7 +222,7 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <div className="hidden text-lg lg:flex items-center space-x-8">
             {navigation.map((item) => {
-              if ('dropdown' in item && item.dropdown) {
+              if ("dropdown" in item && item.dropdown) {
                 return (
                   <div key={item.name} className="relative">
                     <button
@@ -220,7 +231,9 @@ export default function Navbar() {
                     >
                       {item.name}
                       <ChevronDownIcon
-                        className={`w-4 h-4 ml-1 transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`}
+                        className={`w-4 h-4 ml-1 transition-transform ${
+                          openDropdown === item.name ? "rotate-180" : ""
+                        }`}
                         aria-hidden="true"
                       />
                     </button>
@@ -242,7 +255,7 @@ export default function Navbar() {
                 );
               }
 
-              if (item.href.startsWith('#')) {
+              if (item.href.startsWith("#")) {
                 return (
                   <button
                     key={item.name}
@@ -261,8 +274,8 @@ export default function Navbar() {
                   onClick={() => setOpenDropdown(null)}
                   className={`font-medium transition-colors duration-200 ${
                     isActive(item.href)
-                      ? 'text-primary-600 border-b-2 border-primary-600'
-                      : 'text-gray-700 hover:text-primary-600'
+                      ? "text-primary-600 border-b-2 border-primary-600"
+                      : "text-gray-700 hover:text-primary-600"
                   }`}
                 >
                   {item.name}
@@ -301,7 +314,11 @@ export default function Navbar() {
             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <XMarkIcon className="w-6 h-6" />
+            ) : (
+              <Bars3Icon className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
@@ -311,16 +328,22 @@ export default function Navbar() {
         <div className="lg:hidden bg-white border-t shadow-lg">
           <div className="px-4 py-6 space-y-4">
             {navigation.map((item) => {
-              if ('dropdown' in item && item.dropdown) {
+              if ("dropdown" in item && item.dropdown) {
                 return (
                   <div key={item.name}>
                     <button
-                      onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}
+                      onClick={() =>
+                        setOpenDropdown(
+                          openDropdown === item.name ? null : item.name
+                        )
+                      }
                       className="w-full text-left text-gray-700 hover:text-primary-600 font-medium py-2 flex items-center justify-between"
                     >
                       {item.name}
                       <ChevronDownIcon
-                        className={`w-4 h-4 transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`}
+                        className={`w-4 h-4 transition-transform ${
+                          openDropdown === item.name ? "rotate-180" : ""
+                        }`}
                       />
                     </button>
                     {openDropdown === item.name && (
@@ -344,7 +367,7 @@ export default function Navbar() {
                 );
               }
 
-              if (item.href.startsWith('#')) {
+              if (item.href.startsWith("#")) {
                 return (
                   <button
                     key={item.name}
