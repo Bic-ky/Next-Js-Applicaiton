@@ -49,7 +49,7 @@ export default function BlogPage() {
           id: blog.id,
           title: blog.title,
           content: blog.content,
-          image: blog.image || "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=250&fit=crop", // Default image
+          image: blog.image, // Directly use the image URL from the backend
           owner_id: blog.owner_id,
           owner: blog.author ? { username: blog.author } : null, // Adjust to match backend 'author' which can be null
         }));
@@ -102,24 +102,23 @@ export default function BlogPage() {
       return;
     }
 
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://127.0.0.1:8000';
     const blogFormData = new FormData();
     blogFormData.append('title', formData.title);
     blogFormData.append('content', formData.content);
-    blogFormData.append('image', formData.imageFile);
+    blogFormData.append('image', formData.imageFile!);
     
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/blogs/blogs/?title=${encodeURIComponent(formData.title)}&content=${encodeURIComponent(formData.content)}`,
-        {
-          method: 'POST',
-          headers: {
-            'accept': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-            // 'Content-Type': 'multipart/form-data', // Browser sets this automatically with FormData
-          },
-          body: blogFormData,
-        }
-      );
+
+      const response = await fetch(`${API_BASE}/blogs/`, {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: blogFormData, // includes title, content, image
+      });
+
 
       if (response.ok) {
         toast.success('Blog post created successfully!');

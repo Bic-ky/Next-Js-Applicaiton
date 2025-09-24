@@ -29,7 +29,7 @@ export default function Sidebar({
       } transition-transform duration-300 ease-in-out lg:translate-x-0`}
     >
       <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-        <h1 className="text-xl font-bold text-gray-900">Reynolds Clinic</h1>
+        <Link href="/" className="text-xl font-bold text-gray-900">Reynolds Clinic</Link>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="lg:hidden p-1 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"

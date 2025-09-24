@@ -33,7 +33,7 @@ export default function TopBar({
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
       toast.error('No active session found.');
-      router.push('/login');
+      router.push('/');
       return;
     }
 
@@ -49,7 +49,7 @@ export default function TopBar({
       if (response.ok) {
         localStorage.removeItem('accessToken');
         toast.success('Logged out successfully!');
-        router.push('/login');
+        router.push('/');
       } else {
         const errorData = await response.json();
         toast.error(`Logout failed: ${errorData.detail || response.statusText}`);
