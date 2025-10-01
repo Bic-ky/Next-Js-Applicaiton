@@ -1,133 +1,329 @@
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
 
-export default function HormoneTherapy() {
+import Image from "next/image";
+import Link from "next/link";
+import Script from "next/script";
+
+export default function HormoneReplacementTherapy() {
+  const CLINIC_NAME = "Reynolds Clinic";
+  const PHONE_TEL = "+14195353214";
+  const PHONE_DISPLAY = "(419) 535-3214";
+  const ADDRESS = "2450 N Reynolds Rd A, Toledo, OH 43615";
+
+  // Voice assistants (Siri/Google/Alexa): highlight hero headline + summary
+  const speakableJSON = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Hormone Replacement Therapy in Toledo, OH",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".speakable-headline", ".speakable-summary"],
+    },
+  };
+
+  // Business/entity schema
+  const businessJSON = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    name: CLINIC_NAME,
+    medicalSpecialty: "Endocrinology",
+    url: "https://www.reynoldsclinic.net/services/hormone-replacement",
+    telephone: PHONE_TEL,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "2450 N Reynolds Rd A",
+      addressLocality: "Toledo",
+      addressRegion: "OH",
+      postalCode: "43615",
+      addressCountry: "US",
+    },
+    areaServed: "Lucas County",
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-teal-700/80 z-10"></div>
-        <Image
-          src="/api/placeholder/1200/800"
-          alt="Professional hormone therapy consultation and treatment"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="relative z-20 h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Hormone Replacement Therapy
-              </h1>
-              <p className="text-xl md:text-2xl text-white/90 mb-8">
-                Restore hormonal balance and vitality with personalized hormone optimization
-              </p>
-              <Link
-                href="#contact"
-                className="inline-block bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-              >
-                Start Treatment
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* JSON-LD for Speakable & Business */}
+      <Script
+        id="speakable-jsonld-hrt"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJSON) }}
+      />
+      <Script
+        id="business-jsonld-hrt"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJSON) }}
+      />
 
-      {/* Content Section */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-              Advanced Hormone Optimization
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-12 mb-12">
-              <div>
-                <h3 className="text-2xl font-semibold text-blue-600 mb-4">Personalized Treatment</h3>
-                <p className="text-gray-700 mb-6">
-                  Reynolds Clinic offers bioidentical hormone replacement therapy tailored to your unique hormonal profile. Our comprehensive approach addresses symptoms of hormone imbalance for both men and women.
+      {/* ======================= HERO ======================= */}
+      <header className="relative overflow-hidden">
+        <div className="relative h-[56vh] md:h-[68vh]">
+          <Image
+            src="/doctor.png"
+            alt="Hormone replacement therapy consultation and medication at Reynolds Clinic, Toledo"
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-transparent" />
+          <div className="relative h-full">
+            <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center">
+              <div className="max-w-3xl bg-white/5 shadow-xl rounded-xl p-6 sm:p-8">
+                <h1 className="speakable-headline text-3xl md:text-5xl font-bold leading-tight mb-4">
+                  Restoring Balance With Hormone Replacement Therapy
+                </h1>
+                <p className="speakable-summary text-base md:text-lg text-gray-700 mb-6">
+                  Experience expert hormone replacement therapy at Reynolds
+                  Clinic—tailored solutions for men and women. Our personalized
+                  approach helps restore hormonal balance, enhance vitality, and
+                  improve overall well-being. Take the first step toward a
+                  healthier, more energized life today.
                 </p>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 mr-3"></span>
-                    Comprehensive hormone testing
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 mr-3"></span>
-                    Bioidentical hormone therapy
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-teal-500 rounded-full mt-2 mr-3"></span>
-                    Ongoing monitoring & adjustment
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-2xl font-semibold text-blue-600 mb-4">Treatment Options</h3>
-                <div className="space-y-4">
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2">Testosterone Therapy</h4>
-                    <p className="text-gray-700 text-sm">For men with low T, fatigue, and decreased vitality</p>
-                  </div>
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2">Estrogen/Progesterone</h4>
-                    <p className="text-gray-700 text-sm">Menopause relief and women's hormone balance</p>
-                  </div>
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2">Thyroid Optimization</h4>
-                    <p className="text-gray-700 text-sm">Metabolism support and energy enhancement</p>
-                  </div>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={`tel:${PHONE_TEL}`}
+                    className="inline-flex items-center justify-center border border-blue-700 text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 hover:text-white transition-colors"
+                    aria-label={`Call ${CLINIC_NAME} at ${PHONE_DISPLAY}`}
+                  >
+                    Call {PHONE_DISPLAY}
+                  </a>
                 </div>
               </div>
-            </div>
-
-            <div className="bg-blue-50 p-8 rounded-xl mb-12">
-              <h3 className="text-2xl font-semibold text-blue-600 mb-4">Benefits of Hormone Therapy</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-xl">85%</span>
-                  </div>
-                  <p className="font-semibold text-gray-900">Energy Increase</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-xl">90%</span>
-                  </div>
-                  <p className="font-semibold text-gray-900">Mood Improvement</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-xl">2-4</span>
-                  </div>
-                  <p className="font-semibold text-gray-900">Weeks to Results</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Reclaim Your Vitality</h3>
-              <p className="text-gray-700 mb-8">
-                Don't let hormone imbalance control your life. Our expert hormone therapy can help you feel like yourself again.
-              </p>
-              <Link
-                href="#contact"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors mr-4"
-              >
-                Free Consultation
-              </Link>
-              <Link
-                href="tel:+1234567890"
-                className="inline-block bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-              >
-                Call Now
-              </Link>
             </div>
           </div>
         </div>
-      </section>
+      </header>
+
+      <main id="main-content">
+        {/* ======================= FOUR PILLARS ======================= */}
+        <section aria-labelledby="pillars-title" className="py-12 md:py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 id="pillars-title" className="sr-only">
+              Why Choose Our Hormone Replacement Therapy
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                {
+                  n: "1",
+                  t: "Personalized Treatment Plans",
+                  d: "Receive customized hormone replacement therapy for men and women, designed to address your unique needs and deliver effective, sustainable results.",
+                },
+                {
+                  n: "2",
+                  t: "Improved Energy And Vitality",
+                  d: "Regain energy, enhance metabolism, and improve overall well-being with expertly tailored hormone replacement therapy.",
+                },
+                {
+                  n: "3",
+                  t: "Comprehensive Health Support",
+                  d: "Benefit from a holistic approach that supports mental clarity, bone health, cardiovascular wellness, and mood.",
+                },
+                {
+                  n: "4",
+                  t: "Expert Medical Supervision",
+                  d: "Trust in our experienced professionals dedicated to optimizing your hormone levels safely and effectively.",
+                },
+              ].map((item) => (
+                <article
+                  key={item.n}
+                  className="bg-gray-50 rounded-lg p-6 flex items-start gap-4"
+                >
+                  <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 border-blue-400 text-blue-500 text-2xl font-light flex-shrink-0">
+                    {item.n}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-blue-900 text-lg mb-1">
+                      {item.t}
+                    </h3>
+                    <p className="text-gray-700 text-sm leading-relaxed">
+                      {item.d}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================= HRT FOR MEN ======================= */}
+        <section aria-labelledby="hrt-men-title" className="py-16 md:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 items-center">
+            <div className="relative">
+              <div aria-hidden className="absolute -inset-2 rounded-2xl bg-teal-500/10" />
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/hrt-men.jpg"
+                  alt="Hormone replacement therapy for men—doctor approval and plan"
+                  width={900}
+                  height={650}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h2 id="hrt-men-title" className="text-3xl md:text-4xl font-bold mb-4">
+                Hormone Replacement Therapy For Men
+              </h2>
+              <p className="text-gray-700 mb-6">
+                Hormonal imbalances can lead to fatigue, reduced muscle mass,
+                decreased libido, and mood changes. Our HRT for men is designed
+                to restore testosterone balance, enhance energy and strength, and
+                support long-term wellness. Every treatment is tailored to your
+                needs for the best possible results.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Restores testosterone levels for improved energy and strength.",
+                  "Supports muscle mass retention and physical performance.",
+                  "Enhances libido and overall sexual health.",
+                  "Improves mood, focus, and cognitive function.",
+                  "Reduces fatigue and promotes long-term wellness.",
+                ].map((pt) => (
+                  <li key={pt} className="flex items-start text-gray-800">
+                    <svg className="w-5 h-5 mt-1 mr-3 text-teal-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z" />
+                    </svg>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================= WOMEN + ASSESSMENTS ======================= */}
+        <section aria-labelledby="women-assessments-title" className="py-16 md:py-24 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12">
+            {/* Women */}
+            <article aria-labelledby="hrt-women-title">
+              <h3 id="hrt-women-title" className="text-3xl md:text-4xl font-bold mb-4">
+                Hormone Replacement Therapy For Women
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Aging, menopause, and other factors can lead to hormonal
+                imbalances that affect health and quality of life. Our HRT for
+                women helps alleviate symptoms such as hot flashes, fatigue,
+                sleep disruption, and mood changes—restoring balance and
+                enhancing overall well-being.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Reduces menopause symptoms, including hot flashes and night sweats.",
+                  "Supports bone density and cardiovascular health.",
+                  "Enhances mood stability and cognitive function.",
+                  "Improves skin elasticity and overall vitality.",
+                  "Promotes balanced energy levels and restful sleep.",
+                ].map((pt) => (
+                  <li key={pt} className="flex items-start text-gray-800">
+                    <svg className="w-5 h-5 mt-1 mr-3 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z" />
+                    </svg>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            {/* Assessments */}
+            <article aria-labelledby="assessments-title">
+              <h3 id="assessments-title" className="text-3xl md:text-4xl font-bold mb-4">
+                Comprehensive Hormonal Health Assessments
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Before starting HRT for men or women, we conduct thorough
+                assessments to determine your specific needs. Our diagnostic
+                approach includes detailed lab testing, medical history review,
+                and symptom analysis to ensure a precise, safe, and effective
+                plan aligned with your health goals.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "In-depth hormone level testing and analysis.",
+                  "Personalized evaluations based on medical history.",
+                  "Tailored treatment plans for individual needs.",
+                  "Continuous monitoring for optimal results.",
+                  "Lifestyle and dietary guidance to support outcomes.",
+                ].map((pt) => (
+                  <li key={pt} className="flex items-start text-gray-800">
+                    <svg className="w-5 h-5 mt-1 mr-3 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z" />
+                    </svg>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        {/* ======================= SAFE & EFFECTIVE HRT ======================= */}
+        <section aria-labelledby="safe-hrt-title" className="py-16 md:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 items-center">
+            <div className="relative order-2 md:order-1">
+              <div aria-hidden className="absolute -inset-2 rounded-2xl bg-blue-500/10" />
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/hrt-safe.jpg"
+                  alt="Safe and effective HRT treatments—bioidentical and synthetic options"
+                  width={900}
+                  height={650}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="order-1 md:order-2">
+              <h2 id="safe-hrt-title" className="text-3xl md:text-4xl font-bold mb-4">
+                Safe And Effective HRT Treatments
+              </h2>
+              <p className="text-gray-700 mb-6">
+                Our hormone replacement therapy services for men and women
+                prioritize safety and efficacy. We utilize bioidentical and
+                synthetic options as appropriate, with precise dosing, regular
+                monitoring, and adjustments to ensure the best possible
+                outcomes—focused on energy, mood, and overall health.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Bioidentical and synthetic hormone options.",
+                  "Precise dosing guided by lab results.",
+                  "Regular monitoring for safety and effectiveness.",
+                  "Adjustments based on individual response and progress.",
+                  "Holistic support for long-term hormonal health.",
+                ].map((pt) => (
+                  <li key={pt} className="flex items-start text-gray-800">
+                    <svg className="w-5 h-5 mt-1 mr-3 text-teal-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z" />
+                    </svg>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================= NEWSLETTER CTA ======================= */}
+        <section aria-labelledby="cta-title" className="py-16 md:py-24 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-blue-400/95 text-white rounded-2xl p-8 md:p-12 text-center shadow-xl">
+              <h2 id="cta-title" className="text-3xl font-bold mb-3">
+                Stay Informed On Hormonal Health
+              </h2>
+              <p className="text-white/90 max-w-3xl mx-auto mb-8">
+                Subscribe to the Reynolds Clinic newsletter for expert insights,
+                health tips, and updates on hormone replacement therapy for men
+                and women. Stay connected with us and take charge of your wellness journey.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      {/* Contact anchor for hero CTA */}
+      <div id="contact" className="sr-only" aria-hidden="true" />
     </div>
   );
 }

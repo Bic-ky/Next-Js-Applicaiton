@@ -15,10 +15,12 @@ export default function Sidebar({
   sidebarOpen,
   setSidebarOpen,
   sidebarItems,
+  onLogout,
 }: {
   sidebarOpen: boolean;
   setSidebarOpen: (v: boolean) => void;
   sidebarItems: readonly SidebarItem[];
+  onLogout: () => void;
 }) {
   const pathname = usePathname();
 

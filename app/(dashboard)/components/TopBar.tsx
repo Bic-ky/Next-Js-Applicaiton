@@ -38,7 +38,7 @@ export default function TopBar({
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/users/logout', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/logout` , {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -78,22 +78,13 @@ export default function TopBar({
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="Search patients, appointments..."
+              placeholder="Search.."
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 w-64"
             />
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
-          <button
-            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md relative"
-            aria-label="Notifications"
-          >
-            <Bell className="w-6 h-6" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-              3
-            </span>
-          </button>
 
           <div className="relative" ref={dropdownRef}>
             <button

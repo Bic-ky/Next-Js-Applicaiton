@@ -21,7 +21,7 @@ type Blog = {
 
 // ====== DATA FETCH ======
 async function getBlog(id: string): Promise<Blog> {
-  const res = await fetch(`${API_BASE}/blogs/${id}`, {
+  const res = await fetch(`${API_BASE}/blogs/blog-id/${id}`, {
     cache: 'no-store', // fresh content for detail pages
     headers: { accept: 'application/json' },
   });
